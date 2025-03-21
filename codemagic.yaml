@@ -10,18 +10,16 @@ workflows:
 
       android_signing:
 
-        - keystore_reference
-
+        - Modern Elevator 
       groups:
 
         - google_play
-
       vars:
 
         PACKAGE_NAME: "io.codemagic.fluttersample"
 
         GOOGLE_PLAY_TRACK: alpha
-
+        
       flutter: stable
 
     scripts:
