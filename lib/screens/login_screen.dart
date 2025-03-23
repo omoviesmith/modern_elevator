@@ -533,7 +533,291 @@
 //   }
 // }
 
-//src/screens/login_screen.dart
+// //src/screens/login_screen.dart
+// import 'package:flutter/material.dart';
+// import 'package:modern_elevator_app/services/auth_manager.dart';
+// import 'package:modern_elevator_app/widgets/custom_text_field.dart';
+// import 'package:modern_elevator_app/widgets/custom_button.dart';
+// import 'register_screen.dart';
+// import 'forgot_password_screen.dart';
+// import 'dashboard_screen.dart';
+
+// class LoginScreen extends StatefulWidget {
+//   const LoginScreen({super.key});
+
+//   @override
+//   _LoginScreenState createState() => _LoginScreenState();
+// }
+
+// class _LoginScreenState extends State<LoginScreen> {
+//   final _formKey = GlobalKey<FormState>();
+//   final TextEditingController _emailController = TextEditingController();
+//   final TextEditingController _passwordController = TextEditingController();
+
+//   bool _rememberMe = false;
+//   bool _obscurePassword = true;
+//   bool _isLoading = false;
+//   String _errorMessage = '';
+
+//   @override
+//   void dispose() {
+//     _emailController.dispose();
+//     _passwordController.dispose();
+//     super.dispose();
+//   }
+
+//   void _togglePasswordVisibility() {
+//     setState(() {
+//       _obscurePassword = !_obscurePassword;
+//     });
+//   }
+
+//   Future<void> _handleLogin() async {
+//     if (!_formKey.currentState!.validate()) return;
+
+//     setState(() {
+//       _isLoading = true;
+//       _errorMessage = '';
+//     });
+
+//     try {
+//       final response = await AuthManager().login(
+//         _emailController.text.trim(),
+//         _passwordController.text,
+//       );
+
+//       // Get user data from response
+//       // ignore: unused_local_variable
+//       final userData = response['data']['user'];
+      
+//       setState(() {
+//         _isLoading = false;
+//       });
+
+//       // Navigate to Dashboard with user name
+//       Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(
+//           builder: (context) => DashboardScreen(),
+//         ),
+//       );
+//       // Navigator.pushReplacement(
+//       //   context,
+//       //   MaterialPageRoute(
+//       //     builder: (context) => DashboardScreen(
+//       //       mechanicName: "${userData['firstName']} ${userData['lastName']}",
+//       //     ),
+//       //   ),
+//       // );
+//     } catch (e) {
+//       setState(() {
+//         _isLoading = false;
+//         _errorMessage = e.toString().replaceAll('Exception: ', '');
+//       });
+//     }
+//   }
+
+//   void _navigateToRegister() {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => RegisterScreen()),
+//     );
+//   }
+
+//   void _navigateToForgotPassword() {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => ForgotPasswordScreen()),
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color(0xFF040404), // Dark background
+//       body: SingleChildScrollView(
+//         child: Container(
+//           padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 60.0),
+//           child: Form(
+//             key: _formKey,
+//             child: Column(
+//               children: <Widget>[
+//                 // Logo Image
+//                 Image.asset(
+//                   'assets/images/modern_elevator_logo.png',
+//                   width: 100,
+//                   height: 100,
+//                 ),
+//                 SizedBox(height: 20),
+//                 // Title
+//                 Text(
+//                   'Welcome Back',
+//                   style: TextStyle(
+//                     fontSize: 28,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white, // White color
+//                     fontFamily: 'SF Pro Display',
+//                   ),
+//                 ),
+//                 SizedBox(height: 10),
+//                 // Subtitle
+//                 Text(
+//                   'Sign in to continue',
+//                   style: TextStyle(
+//                     fontSize: 16,
+//                     color: Colors.white70,
+//                     fontFamily: 'SF Pro Display',
+//                   ),
+//                 ),
+//                 SizedBox(height: 40),
+                
+//                 // Error message if any
+//                 if (_errorMessage.isNotEmpty) ...[
+//                   Container(
+//                     padding: EdgeInsets.all(12),
+//                     decoration: BoxDecoration(
+//                       color: Colors.red.withAlpha(25),
+//                       borderRadius: BorderRadius.circular(8),
+//                       border: Border.all(color: Colors.red.shade300),
+//                     ),
+//                     child: Row(
+//                       children: [
+//                         Icon(Icons.error_outline, color: Colors.red),
+//                         SizedBox(width: 8),
+//                         Expanded(
+//                           child: Text(
+//                             _errorMessage,
+//                             style: TextStyle(color: Colors.red.shade300),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 20),
+//                 ],
+                
+//                 // Email Field
+//                 CustomTextField(
+//                   controller: _emailController,
+//                   labelText: 'Email',
+//                   prefixIcon: Icons.email,
+//                   keyboardType: TextInputType.emailAddress,
+//                   validator: (value) {
+//                     if (value == null || value.isEmpty) {
+//                       return 'Please enter your email';
+//                     }
+//                     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+//                       return 'Please enter a valid email';
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//                 SizedBox(height: 20),
+                
+//                 // Password Field
+//                 CustomTextField(
+//                   controller: _passwordController,
+//                   labelText: 'Password',
+//                   prefixIcon: Icons.lock,
+//                   obscureText: _obscurePassword,
+//                   textInputAction: TextInputAction.done,
+//                   onSubmitted: (_) => _handleLogin(),
+//                   validator: (value) {
+//                     if (value == null || value.isEmpty) {
+//                       return 'Please enter your password';
+//                     }
+//                     return null;
+//                   },
+//                   suffixIcon: IconButton(
+//                     icon: Icon(
+//                       _obscurePassword ? Icons.visibility : Icons.visibility_off,
+//                       color: Colors.grey,
+//                     ),
+//                     onPressed: _togglePasswordVisibility,
+//                   ),
+//                 ),
+                
+//                 SizedBox(height: 10),
+                
+//                 // Remember Me and Forgot Password
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: <Widget>[
+//                     // Remember Me Checkbox
+//                     Row(
+//                       children: <Widget>[
+//                         Checkbox(
+//                           value: _rememberMe,
+//                           activeColor: Color(0xFFF7D104), // Yellow color
+//                           onChanged: (bool? value) {
+//                             setState(() {
+//                               _rememberMe = value ?? false;
+//                             });
+//                           },
+//                         ),
+//                         Text(
+//                           'Remember Me',
+//                           style: TextStyle(color: Colors.white),
+//                         ),
+//                       ],
+//                     ),
+//                     // Forgot Password Link
+//                     TextButton(
+//                       onPressed: _navigateToForgotPassword,
+//                       child: Text(
+//                         'Forgot Password?',
+//                         style: TextStyle(
+//                           color: Color(0xFFF7D104), // Yellow color
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+                
+//                 SizedBox(height: 30),
+                
+//                 // Login Button
+//                 CustomButton(
+//                   text: 'Login',
+//                   onPressed: _handleLogin,
+//                   isLoading: _isLoading,
+//                 ),
+                
+//                 SizedBox(height: 20),
+                
+//                 // Don't have an account section
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Text(
+//                       "Don't have an account? ",
+//                       style: TextStyle(
+//                         color: Colors.white70,
+//                       ),
+//                     ),
+//                     TextButton(
+//                       onPressed: _navigateToRegister,
+//                       child: Text(
+//                         'Register',
+//                         style: TextStyle(
+//                           color: Color(0xFFF7D104),
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+// src/screens/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:modern_elevator_app/services/auth_manager.dart';
 import 'package:modern_elevator_app/widgets/custom_text_field.dart';
@@ -546,10 +830,10 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -589,7 +873,9 @@ class _LoginScreenState extends State<LoginScreen> {
       // Get user data from response
       // ignore: unused_local_variable
       final userData = response['data']['user'];
-      
+
+      if (!mounted) return;
+
       setState(() {
         _isLoading = false;
       });
@@ -610,6 +896,8 @@ class _LoginScreenState extends State<LoginScreen> {
       //   ),
       // );
     } catch (e) {
+      if (!mounted) return;
+
       setState(() {
         _isLoading = false;
         _errorMessage = e.toString().replaceAll('Exception: ', '');
@@ -670,7 +958,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 40),
-                
+
                 // Error message if any
                 if (_errorMessage.isNotEmpty) ...[
                   Container(
@@ -695,7 +983,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 20),
                 ],
-                
+
                 // Email Field
                 CustomTextField(
                   controller: _emailController,
@@ -706,14 +994,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
-                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                    if (!RegExp(r'^[\w\-.]+@([\w\-]+\.)+[\w\-]{2,4}$')
+                        .hasMatch(value)) {
                       return 'Please enter a valid email';
                     }
                     return null;
                   },
                 ),
                 SizedBox(height: 20),
-                
+
                 // Password Field
                 CustomTextField(
                   controller: _passwordController,
@@ -736,9 +1025,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: _togglePasswordVisibility,
                   ),
                 ),
-                
+
                 SizedBox(height: 10),
-                
+
                 // Remember Me and Forgot Password
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -773,18 +1062,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                
+
                 SizedBox(height: 30),
-                
+
                 // Login Button
                 CustomButton(
                   text: 'Login',
                   onPressed: _handleLogin,
                   isLoading: _isLoading,
                 ),
-                
+
                 SizedBox(height: 20),
-                
+
                 // Don't have an account section
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
