@@ -1270,12 +1270,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
 import 'package:dotted_border/dotted_border.dart';
 import '../widgets/base_scaffold.dart';
 import '../services/api_service.dart';
 
 class IssueReportingMaterialRequestScreen extends StatefulWidget {
+  const IssueReportingMaterialRequestScreen({super.key});
+
   @override
   _IssueReportingMaterialRequestScreenState createState() =>
       _IssueReportingMaterialRequestScreenState();
@@ -1338,27 +1339,51 @@ class _IssueReportingMaterialRequestScreenState
 
   // Load projects for the current user
   Future<void> _loadProjects() async {
-    try {
-      setState(() {
-        _isProjectsLoading = true;
-      });
-      final projects = await ApiService.getProjects();
-      setState(() {
-        _projects = projects;
-        _isProjectsLoading = false;
-        // Auto-select first project if available
-        if (_projects.isNotEmpty) {
-          _selectedProject = _projects[0];
-          _loadElevatorsForProject(_selectedProject['id']);
-        }
-      });
-    } catch (e) {
-      setState(() {
-        _isProjectsLoading = false;
-      });
-      _showErrorSnackBar("Failed to load projects: $e");
-    }
+  try {
+    setState(() {
+      _isProjectsLoading = true;
+    });
+    final projects = await ApiService.getProjects();
+    if (!mounted) return; // Ensure the widget is still mounted
+    setState(() {
+      _projects = projects;
+      _isProjectsLoading = false;
+      // Auto-select first project if available
+      if (_projects.isNotEmpty) {
+        _selectedProject = _projects[0];
+        _loadElevatorsForProject(_selectedProject['id']);
+      }
+    });
+  } catch (e) {
+    if (!mounted) return; // Ensure the widget is still mounted
+    setState(() {
+      _isProjectsLoading = false;
+    });
+    _showErrorSnackBar("Failed to load projects: $e");
   }
+}
+  // Future<void> _loadProjects() async {
+  //   try {
+  //     setState(() {
+  //       _isProjectsLoading = true;
+  //     });
+  //     final projects = await ApiService.getProjects();
+  //     setState(() {
+  //       _projects = projects;
+  //       _isProjectsLoading = false;
+  //       // Auto-select first project if available
+  //       if (_projects.isNotEmpty) {
+  //         _selectedProject = _projects[0];
+  //         _loadElevatorsForProject(_selectedProject['id']);
+  //       }
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       _isProjectsLoading = false;
+  //     });
+  //     _showErrorSnackBar("Failed to load projects: $e");
+  //   }
+  // }
 
   // Load elevators for selected project
   Future<void> _loadElevatorsForProject(String projectId) async {
@@ -1386,23 +1411,43 @@ class _IssueReportingMaterialRequestScreenState
 
   // Load available materials
   Future<void> _loadMaterials({String? search}) async {
-    try {
-      setState(() {
-        _isMaterialsLoading = true;
-      });
-      final materials = await ApiService.getMaterials(search: search);
-      setState(() {
-        _materials = materials;
-        _filteredMaterials = materials;
-        _isMaterialsLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isMaterialsLoading = false;
-      });
-      _showErrorSnackBar("Failed to load materials: $e");
-    }
+  try {
+    setState(() {
+      _isMaterialsLoading = true;
+    });
+    final materials = await ApiService.getMaterials(search: search);
+    if (!mounted) return; // Ensure the widget is still mounted
+    setState(() {
+      _materials = materials;
+      _filteredMaterials = materials;
+      _isMaterialsLoading = false;
+    });
+  } catch (e) {
+    if (!mounted) return; // Ensure the widget is still mounted
+    setState(() {
+      _isMaterialsLoading = false;
+    });
+    _showErrorSnackBar("Failed to load materials: $e");
   }
+}
+  // Future<void> _loadMaterials({String? search}) async {
+  //   try {
+  //     setState(() {
+  //       _isMaterialsLoading = true;
+  //     });
+  //     final materials = await ApiService.getMaterials(search: search);
+  //     setState(() {
+  //       _materials = materials;
+  //       _filteredMaterials = materials;
+  //       _isMaterialsLoading = false;
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       _isMaterialsLoading = false;
+  //     });
+  //     _showErrorSnackBar("Failed to load materials: $e");
+  //   }
+  // }
 
   // Search materials
   void _searchMaterials(String query) {
@@ -2546,7 +2591,7 @@ class _IssueReportingMaterialRequestScreenState
                       child: Container(
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7),
+                          color: Colors.black.withAlpha(179),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(

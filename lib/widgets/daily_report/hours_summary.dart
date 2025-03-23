@@ -11,13 +11,13 @@ class HoursSummary extends StatelessWidget {
   final String reportStatus;
 
   const HoursSummary({
-    Key? key,
+    super.key,
     required this.regularMinutes,
     required this.overtimeMinutes,
     this.onSubmit,
     this.isSubmitting = false,
     required this.reportStatus,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class HoursSummary extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withAlpha(25),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.green),
                 ),

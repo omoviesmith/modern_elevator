@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String)? onSubmitted;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     required this.prefixIcon,
@@ -24,7 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.autofocus = false,
     this.textInputAction = TextInputAction.next,
     this.onSubmitted,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -163,6 +163,8 @@ void main() {
 }
 
 class ModernElevatorApp extends StatelessWidget {
+  const ModernElevatorApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

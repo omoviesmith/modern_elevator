@@ -124,7 +124,7 @@ class BaseScaffold extends StatelessWidget {
   final bool showFAB;
   final int currentIndex;
 
-  BaseScaffold({
+  const BaseScaffold({super.key, 
     required this.body,
     this.title,
     this.showAppBar = true,
@@ -162,69 +162,138 @@ class BaseScaffold extends StatelessWidget {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // Define BottomAppBar items
-    List<BottomNavigationBarItem> items = [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: 'Dashboard',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.report_problem),
-        label: 'Issue Reporting',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.article), // New icon for the Daily Report Screen
-        label: 'Daily Report',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.logout),
-        label: 'Logout',
-      ),
-    ];
 
-    return Scaffold(
-      appBar: showAppBar
-          ? AppBar(
-              title: Text(
-                title ?? '',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'SF Pro Display',
+  @override
+Widget build(BuildContext context) {
+  // Define BottomAppBar items
+  List<BottomNavigationBarItem> items = [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Dashboard',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.report_problem),
+      label: 'Issue Reporting',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.article), // New icon for the Daily Report Screen
+      label: 'Daily Report',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.logout),
+      label: 'Logout',
+    ),
+  ];
+
+  return Scaffold(
+    appBar: showAppBar
+        ? AppBar(
+            title: Text(
+              title ?? '',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'SF Pro Display',
+              ),
+            ),
+            backgroundColor: Color(0xFF040404),
+          )
+        : null,
+    body: body,
+    bottomNavigationBar: BottomNavigationBar(
+      backgroundColor: Color(0xFF121212),
+      selectedItemColor: Color(0xFFF7D104),
+      unselectedItemColor: Colors.white70,
+      currentIndex: currentIndex,
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) => _onItemTapped(context, index),
+      items: items,
+    ),
+    floatingActionButton: showFAB
+        ? FloatingActionButton(
+            backgroundColor: Color(0xFFF7D104),
+            child: Icon(
+              Icons.timer,
+              color: Color(0xFF040404),
+            ),
+            onPressed: () {
+              // Navigate to the Time Tracking Screen without affecting the BottomNavigationBar
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TimeTrackingScreen(),
                 ),
-              ),
-              backgroundColor: Color(0xFF040404),
-            )
-          : null,
-      body: body,
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF121212),
-        selectedItemColor: Color(0xFFF7D104),
-        unselectedItemColor: Colors.white70,
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) => _onItemTapped(context, index),
-        items: items,
-      ),
-      floatingActionButton: showFAB
-          ? FloatingActionButton(
-              backgroundColor: Color(0xFFF7D104),
-              child: Icon(
-                Icons.timer,
-                color: Color(0xFF040404),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TimeTrackingScreen(),
-                  ),
-                );
-              },
-            )
-          : null,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
-  }
+              );
+            },
+          )
+        : null,
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+  );
 }
+}
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // Define BottomAppBar items
+//     List<BottomNavigationBarItem> items = [
+//       BottomNavigationBarItem(
+//         icon: Icon(Icons.home),
+//         label: 'Dashboard',
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(Icons.report_problem),
+//         label: 'Issue Reporting',
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(Icons.article), // New icon for the Daily Report Screen
+//         label: 'Daily Report',
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(Icons.logout),
+//         label: 'Logout',
+//       ),
+//     ];
+
+//     return Scaffold(
+//       appBar: showAppBar
+//           ? AppBar(
+//               title: Text(
+//                 title ?? '',
+//                 style: TextStyle(
+//                   fontWeight: FontWeight.bold,
+//                   fontFamily: 'SF Pro Display',
+//                 ),
+//               ),
+//               backgroundColor: Color(0xFF040404),
+//             )
+//           : null,
+//       body: body,
+//       bottomNavigationBar: BottomNavigationBar(
+//         backgroundColor: Color(0xFF121212),
+//         selectedItemColor: Color(0xFFF7D104),
+//         unselectedItemColor: Colors.white70,
+//         currentIndex: currentIndex,
+//         type: BottomNavigationBarType.fixed,
+//         onTap: (index) => _onItemTapped(context, index),
+//         items: items,
+//       ),
+//       floatingActionButton: showFAB
+//           ? FloatingActionButton(
+//               backgroundColor: Color(0xFFF7D104),
+//               child: Icon(
+//                 Icons.timer,
+//                 color: Color(0xFF040404),
+//               ),
+//               onPressed: () {
+//                 Navigator.push(
+//                   context,
+//                   MaterialPageRoute(
+//                     builder: (context) => TimeTrackingScreen(),
+//                   ),
+//                 );
+//               },
+//             )
+//           : null,
+//       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+//     );
+//   }
+// }

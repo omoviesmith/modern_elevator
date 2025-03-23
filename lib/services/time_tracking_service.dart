@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
+import 'dart:developer'; 
 
 class TimeTrackingService {
   // Singleton instance
@@ -58,7 +59,7 @@ class TimeTrackingService {
           }
         }
       } catch (e) {
-        print('Error initializing time tracking: $e');
+        log('Error initializing time tracking: $e');
       }
     }
   }
@@ -120,7 +121,7 @@ class TimeTrackingService {
       
       return await Geolocator.getCurrentPosition();
     } catch (e) {
-      print('Error getting location: $e');
+      log('Error getting location: $e');
       return null;
     }
   }
@@ -130,7 +131,7 @@ Future<bool> verifyLocation(String projectId) async {
   try {
     final position = await getCurrentLocation();
     if (position == null) {
-      print('Could not get current location');
+      log('Could not get current location');
       // For testing purposes, return true to bypass location verification
       return true; // In production, return false
     }
@@ -141,10 +142,10 @@ Future<bool> verifyLocation(String projectId) async {
       longitude: position.longitude,
     );
     
-    print('Location verification result: $isVerified');
+    log('Location verification result: $isVerified');
     return isVerified;
   } catch (e) {
-    print('Error verifying location: $e');
+    log('Error verifying location: $e');
     // For testing purposes, return true to bypass location verification
     return true; // In production, return false
   }
@@ -191,7 +192,7 @@ Future<bool> verifyLocation(String projectId) async {
       
       return true;
     } catch (e) {
-      print('Error starting time entry: $e');
+      log('Error starting time entry: $e');
       return false;
     }
   }
@@ -234,7 +235,7 @@ Future<bool> verifyLocation(String projectId) async {
       
       return true;
     } catch (e) {
-      print('Error completing time entry: $e');
+      log('Error completing time entry: $e');
       return false;
     }
   }

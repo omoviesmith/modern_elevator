@@ -1792,12 +1792,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'issue_reporting_screen.dart';
-import 'time_tracking_screen.dart';
 import '../widgets/base_scaffold.dart';
 import '../services/api_service.dart';
+import 'dart:developer';
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -1858,7 +1859,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         });
       }
     } catch (e) {
-      print('Error loading dashboard data: $e');
+      log('Error loading dashboard data: $e');
       rethrow;
     }
   }
@@ -1872,7 +1873,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         });
       }
     } catch (e) {
-      print('Error loading quick stats: $e');
+      log('Error loading quick stats: $e');
       rethrow;
     }
   }
@@ -2053,7 +2054,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               GestureDetector(
                 onTap: () {
                   // Navigate to Profile or Settings
-                  print('Profile Avatar Tapped');
+                  log('Profile Avatar Tapped');
                 },
                 child: CircleAvatar(
                   radius: 28,
@@ -2300,7 +2301,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           'Assigned Job Sites',
           onViewAll: () {
             // Navigate to job sites screen
-            print('View all job sites');
+            log('View all job sites');
           },
         ),
         SizedBox(height: 10),
@@ -2320,7 +2321,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   : 'No Elevator',
                 onTap: () {
                   // Navigate to Job Site Details
-                  print('Job Site Tapped: ${project['name']}');
+                  log('Job Site Tapped: ${project['name']}');
                 },
               );
             },
@@ -2453,7 +2454,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 timestamp: notification['timestamp'] as DateTime,
                 onTap: () {
                   // Navigate to Notification Details
-                  print('Notification Tapped: ${notification['message']}');
+                  log('Notification Tapped: ${notification['message']}');
                 },
               );
             },
@@ -2570,7 +2571,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ElevatedButton(
               onPressed: () {
                 // Navigate to Daily Report Screen
-                print('Navigate to Daily Report');
+                log('Navigate to Daily Report');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFF7D104),
@@ -2601,7 +2602,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           'Pending Approvals',
           onViewAll: () {
             // Navigate to approvals screen
-            print('View all approvals');
+            log('View all approvals');
           },
         ),
         SizedBox(height: 10),
@@ -2662,7 +2663,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           onTap: () {
             // Navigate to Report Details
-            print('Report Tapped: ${report['id']}');
+            log('Report Tapped: ${report['id']}');
           },
         ),
       );
@@ -2709,7 +2710,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           onTap: () {
             // Navigate to Material Request Details
-            print('Material Request Tapped: ${request['id']}');
+            log('Material Request Tapped: ${request['id']}');
           },
         ),
       );
@@ -2726,7 +2727,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           'Open Issues',
           onViewAll: () {
             // Navigate to issues screen
-            print('View all issues');
+            log('View all issues');
           },
         ),
         SizedBox(height: 10),
@@ -2778,7 +2779,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   onTap: () {
                     // Navigate to Issue Details
-                    print('Issue Tapped: ${issue['id']}');
+                    log('Issue Tapped: ${issue['id']}');
                   },
                 ),
               );
@@ -2861,7 +2862,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ElevatedButton(
             onPressed: () {
               // Navigate to Performance Reports Screen
-              print('Navigate to Performance Reports');
+              log('Navigate to Performance Reports');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFFF7D104),

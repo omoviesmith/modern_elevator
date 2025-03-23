@@ -1,6 +1,7 @@
 // modern_elevator_app/lib/controllers/dashboard_controller.dart
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
+import 'dart:developer';
 
 enum DashboardLoadingStatus { loading, loaded, error }
 
@@ -54,7 +55,7 @@ class DashboardController with ChangeNotifier {
         _dashboardData = response['data']['dashboard'] ?? {};
       }
     } catch (e) {
-      print('Error loading dashboard data: $e');
+      log('Error loading dashboard data: $e');
     }
   }
 
@@ -66,7 +67,7 @@ class DashboardController with ChangeNotifier {
         _quickStats = response['data']['stats'] ?? {};
       }
     } catch (e) {
-      print('Error loading quick stats: $e');
+      log('Error loading quick stats: $e');
     }
   }
 
@@ -79,7 +80,7 @@ class DashboardController with ChangeNotifier {
       }
       notifyListeners();
     } catch (e) {
-      print('Error loading recent activity: $e');
+      log('Error loading recent activity: $e');
     }
   }
 
@@ -92,7 +93,7 @@ class DashboardController with ChangeNotifier {
       }
       notifyListeners();
     } catch (e) {
-      print('Error loading work summary: $e');
+      log('Error loading work summary: $e');
     }
   }
 

@@ -8,10 +8,10 @@ class TaskDetailDialog extends StatelessWidget {
   final Function(dynamic, Map<String, dynamic>)? onUpdate;
 
   const TaskDetailDialog({
-    Key? key,
+    super.key,
     required this.timeEntry,
     this.onUpdate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

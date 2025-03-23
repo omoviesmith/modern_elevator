@@ -108,11 +108,11 @@ class SubmitConfirmationDialog extends StatelessWidget {
   final int overtimeHours;
 
   const SubmitConfirmationDialog({
-    Key? key,
+    super.key,
     required this.onConfirm,
     required this.regularHours,
     required this.overtimeHours,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +148,7 @@ class SubmitConfirmationDialog extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: Colors.orange.withAlpha(25),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.orange),
               ),

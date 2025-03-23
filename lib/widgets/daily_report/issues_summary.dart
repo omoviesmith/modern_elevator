@@ -7,9 +7,9 @@ class IssuesSummary extends StatelessWidget {
   final List<dynamic> issues;
 
   const IssuesSummary({
-    Key? key,
+    super.key,
     required this.issues,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class IssuesSummary extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(12),
-            color: Theme.of(context).primaryColor.withOpacity(0.1),
+            color: Theme.of(context).primaryColor.withAlpha(25),
             width: double.infinity,
             child: const Text(
               'Issues Reported',
@@ -83,7 +83,7 @@ class IssuesSummary extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
-              color: priorityColor.withOpacity(0.2),
+              color: priorityColor.withAlpha(55),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(

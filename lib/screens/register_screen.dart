@@ -5,6 +5,8 @@ import 'package:modern_elevator_app/widgets/custom_button.dart';
 import 'verify_email_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -53,6 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     try {
+      // ignore: unused_local_variable
       final response = await AuthManager().register(
         _firstNameController.text.trim(),
         _lastNameController.text.trim(),
@@ -128,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: Colors.red.withAlpha(25),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.red.shade300),
                     ),

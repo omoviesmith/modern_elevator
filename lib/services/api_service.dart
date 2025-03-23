@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 // import 'package:modern_elevator_app/models/task_category.dart' as task_category;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/daily_report.dart';
 import 'package:modern_elevator_app/models/task_category.dart' as task_category; // Import with alias
 import 'package:modern_elevator_app/models/task_category.dart'; // Import TaskCategory directly
-
+import 'dart:developer'; 
 
 class ApiService {
   // Base API URL - replace with your actual backend URL
@@ -161,7 +160,7 @@ class ApiService {
         headers: await _getHeaders(),
       );
     } catch (e) {
-      print('Logout error: $e');
+      log('Logout error: $e');
     }
   }
 
@@ -653,11 +652,11 @@ static Future<bool> verifyLocation({
       return data['data']['isVerified'] ?? false;
     } else {
       final errorData = jsonDecode(response.body);
-      print('Location verification failed: ${errorData['message']}');
+      log('Location verification failed: ${errorData['message']}');
       return false;
     }
   } catch (e) {
-    print('Error in verifyLocation: $e');
+    log('Error in verifyLocation: $e');
     // For testing/development purposes, return true to bypass location verification
     return true; // In production, you would return false here
   }

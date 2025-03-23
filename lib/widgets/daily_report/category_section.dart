@@ -9,11 +9,11 @@ class CategorySection extends StatelessWidget {
   final Function(dynamic) onEntryTap;
 
   const CategorySection({
-    Key? key,
+    super.key,
     required this.categoryName,
     required this.timeEntries,
     required this.onEntryTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class CategorySection extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(12),
-            color: Theme.of(context).primaryColor.withOpacity(0.1),
+            color: Theme.of(context).primaryColor.withAlpha(25),
             width: double.infinity,
             child: Text(
               categoryName,
@@ -34,7 +34,7 @@ class CategorySection extends StatelessWidget {
               ),
             ),
           ),
-          ...timeEntries.map((entry) => _buildTimeEntryTile(context, entry)).toList(),
+          ...timeEntries.map((entry) => _buildTimeEntryTile(context, entry)),
         ],
       ),
     );

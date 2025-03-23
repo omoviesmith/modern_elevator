@@ -543,6 +543,8 @@ import 'forgot_password_screen.dart';
 import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -585,6 +587,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       // Get user data from response
+      // ignore: unused_local_variable
       final userData = response['data']['user'];
       
       setState(() {
@@ -673,7 +676,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
+                      color: Colors.red.withAlpha(25),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.red.shade300),
                     ),

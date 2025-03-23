@@ -8,13 +8,13 @@ class CustomButton extends StatelessWidget {
   final IconData? icon;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.isLoading = false,
     this.fullWidth = true,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          disabledBackgroundColor: Color(0xFFF7D104).withOpacity(0.5),
+          disabledBackgroundColor: Color(0xFFF7D104).withAlpha(128),
         ),
         child: buttonChild,
       ),
