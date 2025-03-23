@@ -1278,6 +1278,7 @@ class IssueReportingMaterialRequestScreen extends StatefulWidget {
   const IssueReportingMaterialRequestScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _IssueReportingMaterialRequestScreenState createState() =>
       _IssueReportingMaterialRequestScreenState();
 }

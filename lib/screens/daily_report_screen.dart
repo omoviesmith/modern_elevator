@@ -1130,7 +1130,9 @@ class DailyReportReviewScreenState extends State<DailyReportReviewScreen> {
               surface: Color(0xFF040404),
               onSurface: Colors.white,
             ),
-            dialogBackgroundColor: const Color(0xFF121212),
+          dialogTheme: const DialogTheme(
+          backgroundColor: Color(0xFF121212), // Set dialog background color here
+          ),
           ),
           child: child!,
         );
