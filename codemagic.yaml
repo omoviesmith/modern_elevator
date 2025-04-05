@@ -67,7 +67,7 @@ workflows:
       app_store_connect: Modern App
     environment:
       ios_signing:
-        distribution_type: app-store  # Changed from 'development' to 'app-store'
+        distribution_type: app_store  # Corrected the value
         bundle_identifier: com.meios.modernelevator
       vars:
         APP_STORE_APPLE_ID: 6743774576
