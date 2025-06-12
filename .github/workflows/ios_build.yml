@@ -1,5 +1,5 @@
 name: Build iOS IPA
-on: [push] # Runs on every git push
+on: [push]
 
 jobs:
   build-ios:
@@ -16,11 +16,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build iOS IPA
+      - name: Build iOS IPA (Release)
         run: flutter build ipa --release
 
       - name: Upload IPA artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-ipa
           path: build/ios/ipa/*.ipa
+          retention-days: 5  # Auto-delete after 5 days (optional)
